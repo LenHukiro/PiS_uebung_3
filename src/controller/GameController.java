@@ -9,10 +9,12 @@ public class GameController {
 
     GameModel model;
     BaseView view;
-    public GameController(BaseView view){
+
+    public GameController(BaseView view) {
         this.view = view;
         model = new GameModel();
     }
+
     public int[] getGrid() {
         return model.getGrid();
     }
@@ -25,10 +27,10 @@ public class GameController {
         return model.getScore();
     }
 
-    public void addTile(int[]grid) {
-            model.random_tile(grid);
-            view.show();
-            System.out.println("SCORE ="+ model.getScore());
+    public void addTile(int[] grid) {
+        model.random_tile(grid);
+        view.show();
+        System.out.println("SCORE =" + model.getScore());
     }
 
     public void checkIfGameOver() {
@@ -37,7 +39,6 @@ public class GameController {
         }
     }
 
-    //TODO:find better way of doing this
     public boolean isGameRunning() {
         return model.isGameRunning();
     }
@@ -45,7 +46,7 @@ public class GameController {
     public void keyPressed(int keyCode, boolean isInputValid) {
         int[] grid = getGrid();
         int[] temp_grid = grid;
-        if(isInputValid) {
+        if (isInputValid) {
             switch (keyCode) {
                 case LEFT:
                     score += move(grid);
