@@ -1,7 +1,6 @@
 import processing.core.PApplet;
 import views.BaseView;
 
-import java.util.Arrays;
 public class Main {
 
 /*  0  1  2  3     3  7 11 15     +12 +7  +2  -3  -> -5

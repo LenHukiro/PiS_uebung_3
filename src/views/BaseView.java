@@ -3,7 +3,6 @@ package views;
 import controller.GameController;
 import processing.core.PApplet;
 
-import java.util.Arrays;
 
 public class BaseView extends PApplet {
 
@@ -15,7 +14,7 @@ public class BaseView extends PApplet {
     final int X_OFFSET = 20;
     final int Y_OFFSET = 20;
 
-    GameController controller;
+    final GameController controller;
 
     public void draw() {
     }
@@ -58,6 +57,7 @@ public class BaseView extends PApplet {
         show();
     }
 
+    @SuppressWarnings("PointlessArithmeticExpression")
     public void settings() {
         int X_SIZE = 2 * X_POS + 2 * X_OFFSET + SIZE_BORDER + 4 * (SIZE_TILE + SIZE_BORDER);
         int Y_SIZE = 2 * Y_POS + 2 * Y_OFFSET + SIZE_BORDER + 4 * (SIZE_TILE + SIZE_BORDER);
@@ -66,7 +66,22 @@ public class BaseView extends PApplet {
     }
 
     public void keyPressed() {
-        boolean isInputValid= key == CODED && controller.isGameRunning();
-        controller.keyPressed(keyCode,isInputValid);
+        boolean isMoveAllowed= key == CODED && controller.isGameRunning();
+        if (isMoveAllowed) {
+            switch (keyCode) {
+                case LEFT:
+                    controller.makeMove(0);
+                    break;
+                case RIGHT:
+                    controller.makeMove(2);
+                    break;
+                case UP:
+                    controller.makeMove(3);
+                    break;
+                case DOWN:
+                    controller.makeMove(1);
+            }
+        }
+
     }
 }

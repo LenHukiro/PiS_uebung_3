@@ -7,8 +7,8 @@ import java.util.Arrays;
 
 public class GameController {
 
-    GameModel model;
-    BaseView view;
+    final GameModel model;
+    final BaseView view;
 
     public GameController(BaseView view) {
         this.view = view;
@@ -21,10 +21,6 @@ public class GameController {
 
     public void random_tile() {
         model.random_tile(model.getGrid());
-    }
-
-    public int getScore() {
-        return model.getScore();
     }
 
     public void addTile(int[] grid) {
@@ -43,32 +39,17 @@ public class GameController {
         return model.isGameRunning();
     }
 
-    public void keyPressed(int keyCode, boolean isInputValid) {
+    public void makeMove(int rotation) {
         int[] grid = getGrid();
-        int[] temp_grid = grid;
-        if (isInputValid) {
-            switch (keyCode) {
-                case LEFT:
-                    score += move(grid);
-                    break;
-                case RIGHT:
-                    rotate(grid, 2);
-                    score += move(grid);
-                    rotate(grid, 2);
-                    break;
-                case UP:
-                    rotate(grid);
-                    score += move(grid);
-                    rotate(grid, 3);
-                    break;
-                case DOWN:
-                    rotate(grid, 3);
-                    score += move(grid);
-                    rotate(grid);
-            }
+        int[] temp_grid = Arrays.copyOf(grid,grid.length);
+        if (rotation != 0) {
+            model.rotate(model.getGrid(),4 - rotation );
+            model.addToScore(model.move(model.getGrid()));
+            model.rotate(model.getGrid(),Math.abs(rotation - 4));
+        } else {
+            model.addToScore(model.move(model.getGrid()));
         }
         if (!Arrays.equals(grid, temp_grid)) addTile(grid);
-
         checkIfGameOver();
     }
 }

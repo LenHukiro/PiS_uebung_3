@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class GameModel {
-    int[] grid = new int[16]; // default values are 0
+    final int[] grid = new int[16]; // default values are 0
     int score = 0;
     boolean game = true;
 
@@ -26,7 +26,7 @@ public class GameModel {
         }
         return score;
     }
-    int move(int[] grid) {
+    public int move(int[] grid) {
         int score;
         shift(grid);
         score = merge(grid);
@@ -64,10 +64,10 @@ public class GameModel {
     }
 
     public boolean is_game_over() {
-        int[] temp_grid = grid;
+        int[] temp_grid = Arrays.copyOf(grid,grid.length);
         for (int i = 1; i <= 4; i++) {
             move(temp_grid);
-            rotate(temp_grid);
+            temp_grid = rotate(temp_grid);
         }
         return Arrays.equals(temp_grid, grid);
     }
@@ -87,18 +87,18 @@ public class GameModel {
         }
     }
 
-    void rotate(int[] grid, int n) {
+    public void rotate(int[] grid,int n) {
         for (int i = 1; i <= (n % 4); i++) {
             rotate(grid);
         }
     }
 
-    void rotate(int[] grid) {
+    int[] rotate(int[] grid) {
         int[] temp_grid = new int[grid.length];
         for (int i = 0; i < grid.length; i++) {
             temp_grid[i + 12 - (i % 4) * 5 - (i / 4) * 3] = grid[i];
         }
-        grid = temp_grid;
+        return temp_grid;
     }
 
 
@@ -111,7 +111,7 @@ public class GameModel {
     }
 
     public void addToScore(int val){
-        score =+ val;
+        score += val;
     }
 
     public void gameOver() {
