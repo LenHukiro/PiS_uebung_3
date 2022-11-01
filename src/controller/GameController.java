@@ -41,11 +41,11 @@ public class GameController {
 
     public void makeMove(int rotation) {
         int[] grid = getGrid();
-        int[] temp_grid = Arrays.copyOf(grid,grid.length);
+        int[] temp_grid = Arrays.copyOf(grid, grid.length);
         if (rotation != 0) {
-            model.rotate(model.getGrid(),4 - rotation );
+            model.rotate(model.getGrid(), 4 - rotation);
             model.addToScore(model.move(model.getGrid()));
-            model.rotate(model.getGrid(),Math.abs(rotation - 4));
+            model.rotate(model.getGrid(), Math.abs(rotation - 4));
         } else {
             model.addToScore(model.move(model.getGrid()));
         }

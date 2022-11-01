@@ -19,7 +19,7 @@ public class BaseView extends PApplet {
     public void draw() {
     }
 
-    public BaseView(){
+    public BaseView() {
         controller = new GameController(this);
     }
 
@@ -44,7 +44,6 @@ public class BaseView extends PApplet {
         }
     }
 
-    @SuppressWarnings("PointlessArithmeticExpression")
     public void setup() {
         textAlign(CENTER, CENTER);
         textSize(27);
@@ -66,7 +65,7 @@ public class BaseView extends PApplet {
     }
 
     public void keyPressed() {
-        boolean isMoveAllowed= key == CODED && controller.isGameRunning();
+        boolean isMoveAllowed = key == CODED && controller.isGameRunning();
         if (isMoveAllowed) {
             switch (keyCode) {
                 case LEFT:

@@ -9,7 +9,7 @@ public class GameModel {
     boolean game = true;
 
 
-    public GameModel(){
+    public GameModel() {
 
     }
 
@@ -26,6 +26,7 @@ public class GameModel {
         }
         return score;
     }
+
     public int move(int[] grid) {
         int score;
         shift(grid);
@@ -47,7 +48,6 @@ public class GameModel {
     }
 
 
-
     public void random_tile(int[] grid) {
         int pos, val;
         pos = new Random().nextInt(0, free_slots(grid));
@@ -64,7 +64,7 @@ public class GameModel {
     }
 
     public boolean is_game_over() {
-        int[] temp_grid = Arrays.copyOf(grid,grid.length);
+        int[] temp_grid = Arrays.copyOf(grid, grid.length);
         for (int i = 1; i <= 4; i++) {
             move(temp_grid);
             temp_grid = rotate(temp_grid);
@@ -87,7 +87,7 @@ public class GameModel {
         }
     }
 
-    public void rotate(int[] grid,int n) {
+    public void rotate(int[] grid, int n) {
         for (int i = 1; i <= (n % 4); i++) {
             rotate(grid);
         }
@@ -110,13 +110,13 @@ public class GameModel {
         return score;
     }
 
-    public void addToScore(int val){
+    public void addToScore(int val) {
         score += val;
     }
 
     public void gameOver() {
         game = false;
-        System.out.println("GAME OVER. YOUR SCORE ="+ score);
+        System.out.println("GAME OVER. YOUR SCORE =" + score);
     }
 
     public boolean isGameRunning() {
