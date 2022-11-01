@@ -3,7 +3,7 @@ package model;
 import java.util.Arrays;
 import java.util.Random;
 
-public class GameModel {
+public class GameModel implements IGameModel {
     final int[] grid = new int[16]; // default values are 0
     int score = 0;
     boolean game = true;
