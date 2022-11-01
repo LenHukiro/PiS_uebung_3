@@ -40,6 +40,7 @@ public class GameController {
     }
 
     public void makeMove(int rotation) {
+        System.out.println(rotation);
         int[] grid = getGrid();
         int[] temp_grid = Arrays.copyOf(grid, grid.length);
         if (rotation != 0) {

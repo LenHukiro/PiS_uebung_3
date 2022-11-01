@@ -8,8 +8,8 @@ public class DarkView  extends BaseView {
     }
 
 
-   @Override
-    protected void addColorScheme(){
-
-   }
+//   @Override
+//    protected void addColorScheme(){
+//
+//   }
 }
