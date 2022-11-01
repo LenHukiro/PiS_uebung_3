@@ -48,12 +48,16 @@ public class BaseView extends PApplet implements IView {
         textAlign(CENTER, CENTER);
         textSize(27);
         noStroke();
-        background(color(179, 189, 214));
-        colorMode(HSB, 360, 100, 100);
+        addColorScheme();
 
         controller.random_tile();
         controller.random_tile();
         show();
+    }
+
+    protected void addColorScheme() {
+        background(color(179, 189, 214));
+        colorMode(HSB, 360, 100, 100);
     }
 
     @SuppressWarnings("PointlessArithmeticExpression")
