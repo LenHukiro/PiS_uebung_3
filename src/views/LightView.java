@@ -1,4 +1,10 @@
 package views;
 
-public class LightView {
+import processing.core.PApplet;
+
+public class LightView extends BaseView {
+
+    public static void main(String... args) {
+        PApplet.runSketch(new String[]{""}, new LightView());
+    }
 }

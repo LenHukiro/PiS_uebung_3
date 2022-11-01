@@ -4,7 +4,7 @@ import controller.GameController;
 import processing.core.PApplet;
 
 
-public class BaseView extends PApplet {
+public class BaseView extends PApplet implements IView {
 
     final int SIZE_TILE = 80;
     final int SIZE_BORDER = 10;

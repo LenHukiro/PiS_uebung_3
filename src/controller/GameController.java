@@ -1,16 +1,16 @@
 package controller;
 
 import model.*;
-import views.BaseView;
+import views.IView;
 
 import java.util.Arrays;
 
 public class GameController {
 
     final IGameModel model;
-    final BaseView view;
+    final IView view;
 
-    public GameController(BaseView view) {
+    public GameController(IView view) {
         this.view = view;
         model = new GameModel();
     }
