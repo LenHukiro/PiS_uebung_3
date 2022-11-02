@@ -5,6 +5,8 @@ import views.IView;
 
 import java.util.Arrays;
 
+import static processing.core.PApplet.arrayCopy;
+
 public class GameController {
 
     final IGameModel model;
@@ -40,15 +42,15 @@ public class GameController {
     }
 
     public void makeMove(int rotation) {
-        System.out.println(rotation);
         int[] grid = getGrid();
         int[] temp_grid = Arrays.copyOf(grid, grid.length);
+        arrayCopy(temp_grid,grid);
         if (rotation != 0) {
-            model.rotate(model.getGrid(), 4 - rotation);
-            model.addToScore(model.move(model.getGrid()));
-            model.rotate(model.getGrid(), Math.abs(rotation - 4));
+            model.rotate(grid, 4 - rotation);
+            model.addToScore(model.move(grid));
+            model.rotate(grid, Math.abs(rotation - 4));
         } else {
-            model.addToScore(model.move(model.getGrid()));
+            model.addToScore(model.move(grid));
         }
         if (!Arrays.equals(grid, temp_grid)) addTile(grid);
         checkIfGameOver();

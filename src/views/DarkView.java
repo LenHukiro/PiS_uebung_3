@@ -8,8 +8,9 @@ public class DarkView  extends BaseView {
     }
 
 
-//   @Override
-//    protected void addColorScheme(){
-//
-//   }
+   @Override
+    protected void addColorScheme(){
+    background(color(0x404258));
+    colorMode(RGB,71, 78, 104);
+   }
 }

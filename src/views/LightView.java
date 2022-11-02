@@ -8,8 +8,8 @@ public class LightView extends BaseView {
         PApplet.runSketch(new String[]{""}, new LightView());
     }
 
-    @Override
-    protected void addColorScheme(){
-
-    }
+//    @Override
+//    protected void addColorScheme(){
+//
+//    }
 }

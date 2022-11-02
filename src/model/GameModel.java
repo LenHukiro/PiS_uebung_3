@@ -3,8 +3,10 @@ package model;
 import java.util.Arrays;
 import java.util.Random;
 
+import static processing.core.PApplet.arrayCopy;
+
 public class GameModel implements IGameModel {
-    final int[] grid = new int[16]; // default values are 0
+    int[] grid = new int[16]; // default values are 0
     int score = 0;
     boolean game = true;
 
@@ -50,9 +52,11 @@ public class GameModel implements IGameModel {
 
     public void random_tile(int[] grid) {
         int pos, val;
+        if (free_slots(grid) == 0) return;
         pos = new Random().nextInt(0, free_slots(grid));
         val = new Random().nextInt(0, 1) < 0.9 ? 2 : 4;
         insert_tile(grid, pos, val);
+
     }
 
     int free_slots(int[] grid) {
@@ -64,10 +68,11 @@ public class GameModel implements IGameModel {
     }
 
     public boolean is_game_over() {
-        int[] temp_grid = Arrays.copyOf(grid, grid.length);
+        int[] temp_grid = new int[grid.length];
+        arrayCopy(grid, temp_grid);
         for (int i = 1; i <= 4; i++) {
             move(temp_grid);
-            temp_grid = rotate(temp_grid);
+            rotate(temp_grid);
         }
         return Arrays.equals(temp_grid, grid);
     }
@@ -93,14 +98,13 @@ public class GameModel implements IGameModel {
         }
     }
 
-    int[] rotate(int[] grid) {
+    void rotate(int[] grid) {
         int[] temp_grid = new int[grid.length];
         for (int i = 0; i < grid.length; i++) {
             temp_grid[i + 12 - (i % 4) * 5 - (i / 4) * 3] = grid[i];
         }
-        return temp_grid;
+        arrayCopy(temp_grid, grid);
     }
-
 
     public int[] getGrid() {
         return grid;
