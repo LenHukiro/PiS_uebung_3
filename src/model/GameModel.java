@@ -10,11 +10,6 @@ public class GameModel implements IGameModel {
     int score = 0;
     boolean game = true;
 
-
-    public GameModel() {
-
-    }
-
     int merge(int[] grid) {
         int score = 0;
         for (int i = 0; i < grid.length; i++) {

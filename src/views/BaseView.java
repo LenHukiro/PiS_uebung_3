@@ -50,8 +50,7 @@ public abstract class BaseView extends PApplet implements IView {
         noStroke();
         addColorScheme();
 
-        controller.random_tile();
-        controller.random_tile();
+        controller.createStartTiles();
         show();
     }
 

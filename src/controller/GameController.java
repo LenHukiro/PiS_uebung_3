@@ -21,7 +21,8 @@ public class GameController {
         return model.getGrid();
     }
 
-    public void random_tile() {
+    public void createStartTiles() {
+        model.random_tile(model.getGrid());
         model.random_tile(model.getGrid());
     }
 
@@ -31,7 +32,7 @@ public class GameController {
         System.out.println("SCORE =" + model.getScore());
     }
 
-    public void checkIfGameOver() {
+    private void checkIfGameOver() {
         if (model.is_game_over()) {
             model.gameOver();
         }
