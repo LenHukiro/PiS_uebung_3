@@ -4,18 +4,45 @@ import controller.GameController;
 import processing.core.PApplet;
 
 
+/**
+ * The type Base view.
+ */
 public abstract class BaseView extends PApplet implements IView {
 
+    /**
+     * The Size tile.
+     */
     final int SIZE_TILE = 80;
+    /**
+     * The Size border.
+     */
     final int SIZE_BORDER = 10;
 
+    /**
+     * The X pos.
+     */
     final int X_POS = 0;
+    /**
+     * The Y pos.
+     */
     final int Y_POS = 0;
+    /**
+     * The X offset.
+     */
     final int X_OFFSET = 20;
+    /**
+     * The Y offset.
+     */
     final int Y_OFFSET = 20;
 
+    /**
+     * The Controller.
+     */
     final GameController controller;
 
+    /**
+     * Instantiates a new Base view.
+     */
     public BaseView() {
         controller = new GameController(this);
     }
@@ -23,6 +50,9 @@ public abstract class BaseView extends PApplet implements IView {
     public void draw() {
     }
 
+    /**
+     *
+     */
     public void show() {
         int[] grid = controller.getGrid();
         int edge_length = (int) (sqrt(grid.length));
@@ -44,6 +74,9 @@ public abstract class BaseView extends PApplet implements IView {
         }
     }
 
+    /**
+     *
+     */
     public void setup() {
         textAlign(CENTER, CENTER);
         textSize(27);
@@ -54,11 +87,17 @@ public abstract class BaseView extends PApplet implements IView {
         show();
     }
 
+    /**
+     * Add color scheme.
+     */
     protected void addColorScheme() {
         background(color(179, 189, 214));
         colorMode(HSB, 360, 100, 100);
     }
 
+    /**
+     *
+     */
     @SuppressWarnings("PointlessArithmeticExpression")
     public void settings() {
         int X_SIZE = 2 * X_POS + 2 * X_OFFSET + SIZE_BORDER + 4 * (SIZE_TILE + SIZE_BORDER);
@@ -67,6 +106,9 @@ public abstract class BaseView extends PApplet implements IView {
         size(X_SIZE, Y_SIZE);
     }
 
+    /**
+     *
+     */
     public void keyPressed() {
         boolean isMoveAllowed = key == CODED && controller.isGameRunning();
         if (isMoveAllowed) {

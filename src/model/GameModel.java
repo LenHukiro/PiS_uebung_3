@@ -5,11 +5,29 @@ import java.util.Random;
 
 import static processing.core.PApplet.arrayCopy;
 
+/**
+ * The type Game model.
+ */
 public class GameModel implements IGameModel {
+    /**
+     * The Grid.
+     */
     int[] grid = new int[16]; // default values are 0
+    /**
+     * The Score.
+     */
     int score = 0;
+    /**
+     * The Game.
+     */
     boolean game = true;
 
+    /**
+     * Merge int.
+     *
+     * @param grid the grid
+     * @return the int
+     */
     int merge(int[] grid) {
         int score = 0;
         for (int i = 0; i < grid.length; i++) {
@@ -24,6 +42,11 @@ public class GameModel implements IGameModel {
         return score;
     }
 
+    /**
+     *
+     * @param grid
+     * @return
+     */
     public int move(int[] grid) {
         int score;
         shift(grid);
@@ -32,6 +55,13 @@ public class GameModel implements IGameModel {
         return score;
     }
 
+    /**
+     * Insert tile.
+     *
+     * @param grid the grid
+     * @param n    the n
+     * @param val  the val
+     */
     void insert_tile(int[] grid, int n, int val) {
         for (int i = 0; i < grid.length; i++) {
             if (grid[i] == 0) {
@@ -45,6 +75,10 @@ public class GameModel implements IGameModel {
     }
 
 
+    /**
+     *
+     * @param grid
+     */
     public void random_tile(int[] grid) {
         int pos, val;
         if (free_slots(grid) == 0) return;
@@ -54,6 +88,12 @@ public class GameModel implements IGameModel {
 
     }
 
+    /**
+     * Free slots int.
+     *
+     * @param grid the grid
+     * @return the int
+     */
     int free_slots(int[] grid) {
         int i = 0;
         for (int val : grid) {
@@ -62,6 +102,10 @@ public class GameModel implements IGameModel {
         return i;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean is_game_over() {
         int[] temp_grid = new int[grid.length];
         arrayCopy(grid, temp_grid);
@@ -72,6 +116,11 @@ public class GameModel implements IGameModel {
         return Arrays.equals(temp_grid, grid);
     }
 
+    /**
+     * Shift.
+     *
+     * @param grid the grid
+     */
     void shift(int[] grid) {
         int offset = 0;
         for (int i = 0; i < grid.length; i++) {
@@ -87,12 +136,22 @@ public class GameModel implements IGameModel {
         }
     }
 
+    /**
+     *
+     * @param grid
+     * @param n
+     */
     public void rotate(int[] grid, int n) {
         for (int i = 1; i <= (n % 4); i++) {
             rotate(grid);
         }
     }
 
+    /**
+     * Rotate.
+     *
+     * @param grid the grid
+     */
     void rotate(int[] grid) {
         int[] temp_grid = new int[grid.length];
         for (int i = 0; i < grid.length; i++) {
@@ -101,23 +160,43 @@ public class GameModel implements IGameModel {
         arrayCopy(temp_grid, grid);
     }
 
+    /**
+     *
+     * @return
+     */
     public int[] getGrid() {
         return grid;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     *
+     * @param val
+     */
     public void addToScore(int val) {
         score += val;
     }
 
+
+    /**
+     *
+     */
     public void gameOver() {
         game = false;
         System.out.println("GAME OVER. YOUR SCORE =" + score);
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isGameRunning() {
         return game;
     }
