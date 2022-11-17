@@ -8,25 +8,27 @@ import static processing.core.PApplet.arrayCopy;
 /**
  * The type Game model.
  */
-public class GameModel implements IGameModel {
+public class GameModel {
     /**
-     * The Grid.
+     * The Grid in which the game is being played.
      */
-    int[] grid = new int[16]; // default values are 0
+    final int[] grid = new int[16]; // default values are 0
+
     /**
-     * The Score.
+     * The User's Score.
      */
     int score = 0;
+
     /**
-     * The Game.
+     * Boolean if the game is still in progress.
      */
     boolean game = true;
 
     /**
-     * Merge int.
+     * Merges numbers of the same value together.
      *
      * @param grid the grid
-     * @return the int
+     * @return the updated player score
      */
     int merge(int[] grid) {
         int score = 0;
@@ -43,9 +45,10 @@ public class GameModel implements IGameModel {
     }
 
     /**
+     * Moves a tile inside the grid
      *
-     * @param grid
-     * @return
+     * @param grid containing the numbers of the game
+     * @return the player's score
      */
     public int move(int[] grid) {
         int score;
@@ -56,11 +59,11 @@ public class GameModel implements IGameModel {
     }
 
     /**
-     * Insert tile.
+     * Inserts a new tile inside the grid.
      *
-     * @param grid the grid
-     * @param n    the n
-     * @param val  the val
+     * @param grid the given playing grid
+     * @param n    the position of the new tile
+     * @param val  the value of the enw tile
      */
     void insert_tile(int[] grid, int n, int val) {
         for (int i = 0; i < grid.length; i++) {
@@ -76,8 +79,9 @@ public class GameModel implements IGameModel {
 
 
     /**
+     * Creates a random tile inside the given grid
      *
-     * @param grid
+     * @param grid the given grid
      */
     public void random_tile(int[] grid) {
         int pos, val;
@@ -89,10 +93,10 @@ public class GameModel implements IGameModel {
     }
 
     /**
-     * Free slots int.
+     * Returns the number of free tiles inside the given grid.
      *
-     * @param grid the grid
-     * @return the int
+     * @param grid the given grid
+     * @return number of free tiles
      */
     int free_slots(int[] grid) {
         int i = 0;
@@ -103,8 +107,9 @@ public class GameModel implements IGameModel {
     }
 
     /**
+     * Checks if the game conditions are met for a game over
      *
-     * @return
+     * @return boolean if the player got a game over
      */
     public boolean is_game_over() {
         int[] temp_grid = new int[grid.length];
@@ -117,9 +122,9 @@ public class GameModel implements IGameModel {
     }
 
     /**
-     * Shift.
+     * Fills the empty spaces inside the grid with 0's
      *
-     * @param grid the grid
+     * @param grid the given grid
      */
     void shift(int[] grid) {
         int offset = 0;
@@ -137,9 +142,10 @@ public class GameModel implements IGameModel {
     }
 
     /**
+     * Rotates the given grid a number of times in the given direction
      *
-     * @param grid
-     * @param n
+     * @param grid the given grid
+     * @param n the direction in which the grid is rotated
      */
     public void rotate(int[] grid, int n) {
         for (int i = 1; i <= (n % 4); i++) {
@@ -148,7 +154,7 @@ public class GameModel implements IGameModel {
     }
 
     /**
-     * Rotate.
+     * Rotates the given grid
      *
      * @param grid the grid
      */
@@ -161,24 +167,27 @@ public class GameModel implements IGameModel {
     }
 
     /**
+     * Returns the playing grid
      *
-     * @return
+     * @return the grid
      */
     public int[] getGrid() {
         return grid;
     }
 
     /**
+     * Returns the player's high Score
      *
-     * @return
+     * @return the player's score
      */
     public int getScore() {
         return score;
     }
 
     /**
+     * Adds a value to the player's score
      *
-     * @param val
+     * @param val the points, which should be added to the score
      */
     public void addToScore(int val) {
         score += val;
@@ -186,7 +195,7 @@ public class GameModel implements IGameModel {
 
 
     /**
-     *
+     * Ends the game and prints a game over message
      */
     public void gameOver() {
         game = false;
@@ -194,8 +203,9 @@ public class GameModel implements IGameModel {
     }
 
     /**
+     * Checks if the game is still running
      *
-     * @return
+     * @return boolean if the game is still going on
      */
     public boolean isGameRunning() {
         return game;

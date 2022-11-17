@@ -1,20 +1,22 @@
 package views;
 
 import controller.GameController;
+import controller.IGameController;
+import controller.MoveDirection;
 import processing.core.PApplet;
 
 
 /**
- * The type Base view.
+ * The Base view, which views should implement.
  */
 public abstract class BaseView extends PApplet implements IView {
 
     /**
-     * The Size tile.
+     * The Size of the tile.
      */
     final int SIZE_TILE = 80;
     /**
-     * The Size border.
+     * The Size of the border.
      */
     final int SIZE_BORDER = 10;
 
@@ -36,22 +38,20 @@ public abstract class BaseView extends PApplet implements IView {
     final int Y_OFFSET = 20;
 
     /**
-     * The Controller.
+     * The Controller of this view.
      */
-    final GameController controller;
+    final IGameController controller;
 
     /**
-     * Instantiates a new Base view.
+     * Instantiates the controller for the view.
      */
     public BaseView() {
         controller = new GameController(this);
     }
 
-    public void draw() {
-    }
 
     /**
-     *
+     * Shows and updates the game
      */
     public void show() {
         int[] grid = controller.getGrid();
@@ -75,7 +75,7 @@ public abstract class BaseView extends PApplet implements IView {
     }
 
     /**
-     *
+     * Initializes the application and starts the game
      */
     public void setup() {
         textAlign(CENTER, CENTER);
@@ -88,7 +88,7 @@ public abstract class BaseView extends PApplet implements IView {
     }
 
     /**
-     * Add color scheme.
+     * Adds a color scheme to the application.
      */
     protected void addColorScheme() {
         background(color(179, 189, 214));
@@ -96,7 +96,7 @@ public abstract class BaseView extends PApplet implements IView {
     }
 
     /**
-     *
+     * Sets the size of the application window
      */
     @SuppressWarnings("PointlessArithmeticExpression")
     public void settings() {
@@ -107,25 +107,32 @@ public abstract class BaseView extends PApplet implements IView {
     }
 
     /**
-     *
+     * Handels the KeyInputs from the user
      */
     public void keyPressed() {
         boolean isMoveAllowed = key == CODED && controller.isGameRunning();
         if (isMoveAllowed) {
             switch (keyCode) {
                 case LEFT:
-                    controller.makeMove(0);
+                    controller.makeMove(MoveDirection.LEFT);
                     break;
                 case RIGHT:
-                    controller.makeMove(2);
+                    controller.makeMove(MoveDirection.RIGHT);
                     break;
                 case UP:
-                    controller.makeMove(3);
+                    controller.makeMove(MoveDirection.UP);
                     break;
                 case DOWN:
-                    controller.makeMove(1);
+                    controller.makeMove(MoveDirection.DOWN);
             }
         }
 
     }
+
+    /**
+     * Needs to be added in order to run Processing
+     */
+    public void draw() {
+    }
+
 }

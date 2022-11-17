@@ -8,23 +8,23 @@ import java.util.Arrays;
 import static processing.core.PApplet.arrayCopy;
 
 /**
- * The type Game controller.
+ * The Game controller.
  */
-public class GameController {
+public class GameController implements IGameController {
 
     /**
-     * The Model.
+     * The model of the game.
      */
-    final IGameModel model;
+    final GameModel model;
     /**
-     * The View.
+     * The view of the game.
      */
     final IView view;
 
     /**
      * Instantiates a new Game controller.
      *
-     * @param view the view
+     * @param view the view of the game
      */
     public GameController(IView view) {
         this.view = view;
@@ -32,16 +32,16 @@ public class GameController {
     }
 
     /**
-     * Get grid int [ ].
+     * Getter for the model's grid
      *
-     * @return the int [ ]
+     * @return the grid of the game
      */
     public int[] getGrid() {
         return model.getGrid();
     }
 
     /**
-     * Create start tiles.
+     * Creates start tiles of the game.
      */
     public void createStartTiles() {
         model.random_tile(model.getGrid());
@@ -49,9 +49,9 @@ public class GameController {
     }
 
     /**
-     * Add tile.
+     * Adds a tile into the grid.
      *
-     * @param grid the grid
+     * @param grid the given grid
      */
     public void addTile(int[] grid) {
         model.random_tile(grid);
@@ -60,7 +60,7 @@ public class GameController {
     }
 
     /**
-     *
+     * Checks if a game over occured
      */
     private void checkIfGameOver() {
         if (model.is_game_over()) {
@@ -69,27 +69,29 @@ public class GameController {
     }
 
     /**
-     * Is game running boolean.
+     * Checks if game is still going on.
      *
-     * @return the boolean
+     * @return boolean if the game is still running
      */
     public boolean isGameRunning() {
         return model.isGameRunning();
     }
 
+
+
     /**
-     * Make move.
+     * Makes a move inside the grid, with the given direction as rotation
      *
-     * @param rotation the rotation
+     * @param rotation the direction from which the move was made
      */
-    public void makeMove(int rotation) {
+    public void makeMove(MoveDirection rotation) {
         int[] grid = getGrid();
         int[] temp_grid = Arrays.copyOf(grid, grid.length);
         arrayCopy(temp_grid,grid);
-        if (rotation != 0) {
-            model.rotate(grid, 4 - rotation);
+        if (rotation.direction != 0) {
+            model.rotate(grid, 4 - rotation.direction);
             model.addToScore(model.move(grid));
-            model.rotate(grid, Math.abs(rotation - 4));
+            model.rotate(grid, Math.abs(rotation.direction - 4));
         } else {
             model.addToScore(model.move(grid));
         }
